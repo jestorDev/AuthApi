@@ -4,4 +4,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
-mongoose_1.default.connect("");
+const config_1 = __importDefault(require("./config/config"));
+mongoose_1.default.connect(config_1.default.DB.URI);
+const connetion = mongoose_1.default.connection;
+connetion.once("open", () => {
+    console.log("MongoDB connection stablished");
+});
+connetion.on("error", (err) => {
+    console.log(err);
+    process.exit(0);
+});
