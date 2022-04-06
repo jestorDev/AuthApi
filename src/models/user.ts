@@ -5,6 +5,7 @@ import bcrypt from "bcrypt";
 export interface IUser extends Document{
     email: string;
     password: string;
+    comparePassword : (password : string)=> Promise<boolean>
 }
 
 
@@ -36,8 +37,8 @@ UserSchema.pre<IUser>("save" ,async function ( next){
 
 
 
-UserSchema.methods.comparePasswaords = async function (password : string){
-    await bcrypt.compare(this.password ,  password)
+UserSchema.methods.comparePassword = async function (password : string) : Promise<Boolean>{
+    return await bcrypt.compare( password , this.password )
 }
 
 export default model <IUser>("User", UserSchema)
