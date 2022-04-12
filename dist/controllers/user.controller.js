@@ -38,9 +38,6 @@ const signIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         return res.status(400).json({ msg: "Please send email and password" });
     }
     const user = yield user_1.default.findOne({ email: req.body.email });
-    console.log("++++++++++++++++++++++++++++++++++++++++++++");
-    console.log(user);
-    console.log("++++++++++++++++++++++++++++++++++++++++++++");
     if (!user) {
         return res.status(400).json({ msg: "User not found" });
     }

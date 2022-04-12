@@ -41,12 +41,6 @@ export const signIn = async(req :Request , res:Response) :Promise<Response>=> {
 
     const user  = await User.findOne({email : req.body.email })
 
-
-    console.log("++++++++++++++++++++++++++++++++++++++++++++");
-    console.log(user);
-    console.log("++++++++++++++++++++++++++++++++++++++++++++");
-
-
     if(!user){
         return res.status(400).json({msg:"User not found"})
     }
